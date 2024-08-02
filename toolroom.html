@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools Room - Your One-Stop Shop for Tools</title>
+    <style>
+        :root {
+            --primary-color: #2874f0;
+            --secondary-color: #fb641b;
+            --text-color: #212121;
+            --light-text: #878787;
+            --bg-color: #f1f3f6;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .top-header {
+            padding: 10px 0;
+        }
+
+        .top-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+            display: flex;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .search-bar button {
+            padding: 8px 15px;
+            background-color: var(--white);
+            border: none;
+            border-radius: 0 2px 2px 0;
+            cursor: pointer;
+        }
+
+        .user-actions .btn {
+            margin-left: 20px;
+            padding: 8px 15px;
+            background-color: var(--white);
+            color: var(--primary-color);
+            border-radius: 2px;
+            font-weight: bold;
+        }
+
+        .cart-btn {
+            background-color: var(--secondary-color) !important;
+            color: var(--white) !important;
+        }
+
+        .main-nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        .main-nav li {
+            padding: 15px 20px;
+            position: relative;
+        }
+
+        .main-nav a {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            display: block;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .category-grid, .product-grid, .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+
+        footer {
+            background-color: var(--white);
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+
+        .footer-columns {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .footer-column h3 {
+            font-size: 14px;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul {
+            list-style-type: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: var(--text-color);
+            font-size: 12px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--bg-color);
+            font-size: 12px;
+            color: var(--light-text);
+        }
+
+        @media (max-width: 768px) {
+            .top-header .container {
+                flex-direction: column;
+            }
+
+            .search-bar {
+                margin: 15px 0;
+                width: 100%;
+            }
+
+            .main-nav ul {
+                flex-wrap: wrap;
+            }
+
+            .footer-columns {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <div class="container">
+                <div class="logo">
+                    <img src="logo.png" alt="Tools Room Logo">
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for tools, brands and more">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-actions">
+                    <a href="#login" class="btn">Login</a>
+                    <a href="#cart" class="btn cart-btn"><i class="fas fa-shopping-cart"></i> Cart</a>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#categories">Categories <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="#hand-tools">Hand Tools</a></li>
+                            <li><a href="#power-tools">Power Tools</a></li>
+                            <li><a href="#safety-gear">Safety Gear</a></li>
+                            <li><a href="#accessories">Accessories</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#deals">Today's Deals</a></li>
+                    <li><a href="#new-arrivals">New Arrivals</a></li>
+                    <li><a href="#customer-service">Customer Service</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-slider" class="container"></section>
+
+        <section id="featured-categories" class="container">
+            <h2>Shop by Category</h2>
+            <div class="category-grid"></div>
+        </section>
+
+        <section id="deals-of-the-day" class="container">
+            <h2>Deals of the Day</h2>
+            <div class="product-carousel"></div>
+        </section>
+
+        <section id="top-rated" class="container">
+            <h2>Top Rated Products</h2>
+            <div class="product-grid"></div>
+        </section>
+
+        <section id="brands" class="container">
+            <h2>Shop by Brand</h2>
+            <div class="brand-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>Get to Know Us</h3>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#press">Press Releases</a></li>
+                        <li><a href="#cares">Tools Room Cares</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect with Us</h3>
+                    <ul>
+                        <li><a href="#facebook">Facebook</a></li>
+                        <li><a href="#twitter">Twitter</a></li>
+                        <li><a href="#instagram">Instagram</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Make Money with Us</h3>
+                    <ul>
+                        <li><a href="#sell">Sell on Tools Room</a></li>
+                        <li><a href="#affiliate">Become an Affiliate</a></li>
+                        <li><a href="#advertise">Advertise Your Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Let Us Help You</h3>
+                    <ul>
+                        <li><a href="#account">Your Account</a></li>
+                        <li><a href="#orders">Returns & Replacements</a></li>
+                        <li><a href="#shipping">Shipping Rates & Policies</a></li>
+                        <li><a href="#help">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tools Room. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const APP = {
+            data: {
+                slides: [
+                    { image: 'slide1.jpg', alt: 'Special Offer on Power Tools' },
+                    { image: 'slide2.jpg', alt: 'New Arrivals in Hand Tools' },
+                    { image: 'slide3.jpg', alt: 'Safety Gear Clearance Sale' }
+                ],
+                categories: [
+                    { name: 'Hand Tools', image: 'hand-tools.jpg' },
+                    { name: 'Power Tools', image: 'power-tools.jpg' },
+                    { name: 'Safety Gear', image: 'safety-gear.jpg' },
+                    { name: 'Accessories', image: 'accessories.jpg' }
+                ],
+                dealsProducts: [
+                    { name: 'Premium Screwdriver Set', price: '$29.99', image: 'screwdriver-set.jpg', discount: '25% off' },
+                    { name: 'Heavy Duty Power Drill', price: '$89.99', image: 'power-drill.jpg', discount: '15% off' },
+                    { name: 'Professional Tool Belt', price: '$39.99', image: 'tool-belt.jpg', discount: '20% off' },
+                    { name: 'LED Work Light', price: '$49.99', image: 'work-light.jpg', discount: '30% off' }
+                ],
+                topRatedProducts: [
+                    { name: 'Precision Measuring Tape', price: '$12.99', image: 'measuring-tape.jpg', rating: 4.8 },
+                    { name: 'Ergonomic Hammer', price: '$24.99', image: 'hammer.jpg', rating: 4.7 },
+                    { name: 'Multi-Tool Pliers', price: '$34.99', image: 'pliers.jpg', rating: 4.9 },
+                    { name: 'Cordless Circular Saw', price: '$129.99', image: 'circular-saw.jpg', rating: 4.6 }
+                ],
+                brands: ['dewalt.png', 'makita.png', 'bosch.png', 'milwaukee.png', 'stanley.png', 'craftsman.png']
+            },
+            init() {
+                this.cacheDOM();
+                this.bindEvents();
+                this.render();
+            },
+            cacheDOM() {
+                this.heroSlider = document.getElementById('hero-slider');
+                this.categoryGrid = document.querySelector('.category-grid');
+                this.productCarousel = document.querySelector('.product-carousel');
+                this.productGrid = document.querySelector('.product-grid');
+                this.brandGrid = document.querySelector('.brand-grid');
+                this.searchForm = document.querySelector('.search-bar');
+                this.searchInput = this.searchForm.querySelector('input');
+            },
+            bindEvents() {
+                document.addEventListener('click', this.handleClick.bind(this));
+                this.searchForm.addEventListener('submit', this.handleSearch.bind(this));
+            },
+            handleClick(event) {
+                if (event.target.classList.contains('add-to-cart')) {
+                    this.addToCart(event);
+                } else if (event.target.classList.contains('dropdown')) {
+                    this.toggleDropdown(event);
+                }
+            },
+            handleSearch(event) {
+                event.preventDefault();
+                const searchTerm = this.searchInput.value.trim();
+                if (searchTerm) {
+                    alert(`Searching for: ${searchTerm}`);
+                }
+            },
+            render() {
+                this.renderHeroSlider();
+                this.renderCategories();
+                this.renderDealsOfTheDay();
+                this.renderTopRatedProducts();
+                this.renderBrands();
+            },
+            renderHeroSlider() {
+                this.heroSlider.innerHTML = this.data.slides.map(slide => 
+                    `<img src="${slide.image}" alt="${slide.alt}">`
+                ).join('');
+                this.initSlider();
+            },
+            renderCategories() {
+                this.categoryGrid.innerHTML = this.data.categories.map(category => 
+                    `<div class="category-card">
+                        <img src="${category.image}" alt="${category.name}">
+                        <h3>${category.name}</h3>
+                    </div>`
+                ).join('');
+            },
+            renderDealsOfTheDay() {
+                this.productCarousel.innerHTML = this.data.dealsProducts.map(product => 
+                    `<div class="product-card">
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}</p>
+                        <p class="discount">${product.discount}</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>`
+                ).join('');
+            },
+            renderTopRatedProducts() {
+                this.productGrid.innerHTML = this.data.topRatedProducts.map(product => 
+                    `<div class="product-card">
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}</p>
+                        <p class="rating">★ ${product.rating}</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>`
+                ).join('');
+            },
+            renderBrands() {
+                this.brandGrid.innerHTML = this.data.brands.map(brand => 
+                    `<div class="brand-card">
+                        <img src="${brand}" alt="${brand.split('.')[0]} logo">
+                    </div>`
+                ).join('');
+            },
+            initSlider() {
+                let currentSlide = 0;
+                const slides = this.heroSlider.children;
+                setInterval(() => {
+                    slides[currentSlide].style.display = 'none';
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].style.display = 'block';
+                }, 5000);
+            },
+            addToCart(event) {
+                const button = event.target;
+                const productCard = button.closest('.product-card');
+                const productName = productCard.querySelector('h3').textContent;
+                const productPrice = productCard.querySelector('.price').textContent;
+
+                // Here you would typically update the cart in the backend
+                console.log(`Added to cart: ${productName} - ${productPrice}`);
+
+                this.updateCartCount();
+            },
+            updateCartCount() {
+                const cartCount = document.querySelector('.cart-count');
+                if (cartCount) {
+                    let count = parseInt(cartCount.textContent) || 0;
+                    cartCount.textContent = count + 1;
+                }
+            },
+            toggleDropdown(event) {
+                event.stopPropagation();
+                const dropdown = event.target.closest('.dropdown');
+                dropdown.classList.toggle('active');
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            APP.init();
+        });
+
+        // Responsive menu toggle
+        const menuToggle = document.createElement('button');
+        menuToggle.textContent = '☰';
+        menuToggle.className = 'menu-toggle';
+        document.querySelector('.main-nav').prepend(menuToggle);
+
+        menuToggle.addEventListener('click', () => {
+            document.querySelector('.main-nav ul').classList.toggle('show');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.dropdown.active').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
